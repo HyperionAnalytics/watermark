@@ -44,6 +44,7 @@ Examples:
 """
 import platform
 import subprocess
+import re
 from time import strftime
 from socket import gethostname
 from pkg_resources import get_distribution
@@ -154,16 +155,34 @@ class WaterMark(Magics):
 
 
     def _get_sysinfo(self):
+        def linux_cpu():
+            modelCPU = subprocess.check_output('cat /proc/cpuinfo | sed -n -e "0,/model name\s*:\s*/s///p" | tr -d "\n"', shell=True).decode('utf-8')
+                # sed '0,/this/s//to_that/' filename.txt
+            return modelCPU
+
+
+        def osx_cpu():
+            modelCPU = subprocess.check_output('sysctl -n machdep.cpu.brand_string', shell=True).decode('utf-8')
+            return modelCPU
+
+        stringDesc = platform.system()
+        if stringDesc == 'Linux':
+            stringCPU = linux_cpu()
+        elif stringDesc == 'Darwin':
+            stringCPU = osx_cpu()
+            osxVersion = subprocess.check_output('sw_vers -productVersion', shell=True).decode('utf-8')
+            stringDesc = stringDesc + ' / ' + osxVersion
+
         if self.out:
             self.out += '\n\n'
         self.out += 'compiler   : %s\nsystem     : %s\n'\
         'release    : %s\nmachine    : %s\n'\
         'processor  : %s\nCPU cores  : %s\ninterpreter: %s'%(
         platform.python_compiler(),
-        platform.system(),
+        stringDesc,
         platform.release(),
         platform.machine(),
-        platform.processor(),
+        stringCPU,
         cpu_count(),
         platform.architecture()[0]
         )
