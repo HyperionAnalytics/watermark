@@ -163,6 +163,7 @@ class WaterMark(Magics):
 
         def osx_cpu():
             modelCPU = subprocess.check_output('sysctl -n machdep.cpu.brand_string', shell=True).decode('utf-8')
+            modelCPU = modelCPU.rstrip('\n')
             return modelCPU
 
         stringDesc = platform.system()
@@ -173,6 +174,7 @@ class WaterMark(Magics):
             stringCPU = osx_cpu()
             osxVersion = subprocess.check_output('sw_vers -productVersion', shell=True).decode('utf-8')
             stringDesc = 'OS X ' + osxVersion
+            stringDesc = stringDesc.rstrip('\n')
 
         if self.out:
             self.out += '\n\n'
