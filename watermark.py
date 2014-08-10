@@ -168,7 +168,7 @@ class WaterMark(Magics):
         stringDesc = platform.system()
         if stringDesc == 'Linux':
             stringCPU = linux_cpu()
-            stringDesc = check_output('lsb_release -a | sed -n -e "s/Description:\s*//p" | tr -d "\n"', shell=True).decode('utf-8')
+            stringDesc = subprocess.check_output('lsb_release -a | sed -n -e "s/Description:\s*//p" | tr -d "\n"', shell=True).decode('utf-8')
         elif stringDesc == 'Darwin':
             stringCPU = osx_cpu()
             osxVersion = subprocess.check_output('sw_vers -productVersion', shell=True).decode('utf-8')
