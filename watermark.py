@@ -172,7 +172,7 @@ class WaterMark(Magics):
         elif stringDesc == 'Darwin':
             stringCPU = osx_cpu()
             osxVersion = subprocess.check_output('sw_vers -productVersion', shell=True).decode('utf-8')
-            stringDesc = stringDesc + ' / ' + osxVersion
+            stringDesc = 'OS X ' + osxVersion
 
         if self.out:
             self.out += '\n\n'
