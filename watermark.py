@@ -155,26 +155,26 @@ class WaterMark(Magics):
 
 
     def _get_sysinfo(self):
-        def linux_cpu():
-            modelCPU = subprocess.check_output('cat /proc/cpuinfo | sed -n -e "0,/model name\s*:\s*/s///p" | tr -d "\n"', shell=True).decode('utf-8')
-                # sed '0,/this/s//to_that/' filename.txt
-            return modelCPU
+        def linux_os():
+            modelCPU = subprocess.check_output('cat /proc/cpuinfo | sed -n -e '
+                '"0,/model name\s*:\s*/s///p" | tr -d "\n"', shell=True, universal_newlines=True)
+            stringDesc = subprocess.check_output('lsb_release -a | sed -n -e "s/Description:\s*//p" | '
+                'tr -d "\n"', shell=True, universal_newlines=True)
+            return modelCPU, stringDesc
 
-
-        def osx_cpu():
-            modelCPU = subprocess.check_output('sysctl -n machdep.cpu.brand_string', shell=True).decode('utf-8')
-            modelCPU = modelCPU.rstrip('\n')
-            return modelCPU
+        def apple_os():
+            modelCPU = subprocess.check_output('sysctl -n machdep.cpu.brand_string | tr -d "\n"',
+                shell=True, universal_newlines=True)
+            osxVersion = subprocess.check_output('sw_vers -productVersion | tr -d "\n"',
+                shell=True, universal_newlines=True)
+            stringDesc = 'OS X ' + osxVersion
+            return modelCPU, stringDesc
 
         stringDesc = platform.system()
         if stringDesc == 'Linux':
-            stringCPU = linux_cpu()
-            stringDesc = subprocess.check_output('lsb_release -a | sed -n -e "s/Description:\s*//p" | tr -d "\n"', shell=True).decode('utf-8')
+            stringCPU, stringDesc = linux_os()
         elif stringDesc == 'Darwin':
-            stringCPU = osx_cpu()
-            osxVersion = subprocess.check_output('sw_vers -productVersion', shell=True).decode('utf-8')
-            stringDesc = 'OS X ' + osxVersion
-            stringDesc = stringDesc.rstrip('\n')
+            stringCPU, stringDesc = apple_os()
 
         if self.out:
             self.out += '\n\n'
