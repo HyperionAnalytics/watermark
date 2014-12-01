@@ -33,13 +33,13 @@ For more examples can be found in this [IPython notebook](http://nbviewer.ipytho
 
 In order to intall `watermark`, execute the the following code snippet in an IPython shell or IPython notebook cell.
 
-	%install_ext https://raw.githubusercontent.com/rasbt/watermark/master/watermark.py
-	
+	%install_ext https://raw.githubusercontent.com/HyperionAnalytics/watermark/master/watermark.py
+
 For updates, simply execute the `%install_ext` again. Information about the current watermark version can be found in the help menu (via `%watermark?`).
 
 <br>
-<br>	
-	
+<br>
+
 ## Usage
 [[back to contents](#contents)]
 
@@ -48,12 +48,12 @@ After successful installation, the `watermark` magic extension can be loaded via
 	%load_ext watermark
 
 <br>
-<br>	
-	
+<br>
+
 To get an overview of all available commands, type:
 
 	%watermark?
-	
+
 <br>
 
 
@@ -62,7 +62,7 @@ To get an overview of all available commands, type:
 	                 [-p PACKAGES] [-h] [-m] [-g]
 
 
-	IPython magic function to print date/time stamps 
+	IPython magic function to print date/time stamps
 	and various system information.
 
 	watermark version 1.1.0
@@ -84,5 +84,4 @@ To get an overview of all available commands, type:
 	  -h, --hostname        prints the host name
 	  -m, --machine         prints system and machine info
 	  -g, --githash         prints current Git commit hash
-	  
-	 
+
