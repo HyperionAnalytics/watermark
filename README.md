@@ -1,7 +1,13 @@
 watermark
 =========
 
-An IPython magic extension for printing date and time stamps, version numbers, and hardware information
+An IPython magic extension for printing date and time stamps, version numbers, and hardware information.
+
+This is a fork with following enhancements:
+* Show system info as OS X version number or Linux distribution name
+* Show release info as Linux kernel version
+* Show processor info as full CPU name given by the manufacturer
+* Show Intel MKL version in packages info
 
 <br>
 #### Contents
@@ -17,11 +23,39 @@ An IPython magic extension for printing date and time stamps, version numbers, a
 ## Examples
 [[back to contents](#contents)]
 
-![](./images/ex1.png)
+	%watermark
 
-![](./images/ex2.png)
+	04/12/2014 07:46:48
 
-![](./images/ex3.png)
+	CPython 3.4.2
+	IPython 2.3.1
+
+	compiler   : GCC 4.2.1 (Apple Inc. build 5577)
+	system     : OS X 10.10.1
+	release    : 14.0.0
+	machine    : x86_64
+	processor  : Intel(R) Core(TM) i7-3740QM CPU @ 2.70GHz
+	CPU cores  : 8
+	interpreter: 64bit
+
+<br>
+
+	%watermark -v -m -p numpy,scipy,mkl
+
+	CPython 3.4.2
+	IPython 2.3.1
+
+	numpy 1.9.1
+	scipy 0.14.0
+	mkl 11.1.1
+
+	compiler   : GCC 4.2.1 (Apple Inc. build 5577)
+	system     : OS X 10.10.1
+	release    : 14.0.0
+	machine    : x86_64
+	processor  : Intel(R) Core(TM) i7-3740QM CPU @ 2.70GHz
+	CPU cores  : 8
+	interpreter: 64bit
 
 For more examples can be found in this [IPython notebook](http://nbviewer.ipython.org/github/rasbt/watermark/blob/master/docs/watermark.ipynb).
 
