@@ -3,11 +3,11 @@ watermark
 
 An IPython magic extension for printing date and time stamps, version numbers, and hardware information.
 
-This is a fork with following enhancements:
+**This is a fork with following enhancements:**
 * Show system info as OS X version number or Linux distribution name
 * Show release info as Linux kernel version
 * Show processor info as full CPU name given by the manufacturer
-* Show Intel MKL version in packages info
+* Show Intel MKL version in packages info if it
 
 <br>
 #### Contents
